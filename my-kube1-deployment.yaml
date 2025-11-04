@@ -1,19 +1,12 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: my-kube1-deployment
+  name: my-kube1-service
 spec:
-  replicas: 1
+  type: NodePort
   selector:
-    matchLabels:
-      app: kube1
-  template:
-    metadata:
-      labels:
-        app: kube1
-    spec:
-      containers:
-      - name: kube1-container
-        image: satyamamrutkar/kube1:latest
-        ports:
-        - containerPort: 80
+    app: kube1
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080
