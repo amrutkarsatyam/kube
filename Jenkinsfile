@@ -15,7 +15,7 @@ pipeline {
 
         stage('Build Docker Image') {
     steps {
-        sh 'docker build -t yourdockerhubusername/kube1:latest .'
+        sh 'docker build -t satyamamrutkar/kube1:latest .'
     }
 }
 
@@ -23,8 +23,8 @@ pipeline {
         stage('Push to Docker Hub') {
     steps {
         sh '''
-            docker login -u yourdockerhubusername -p yourpassword
-            docker push yourdockerhubusername/kube1:latest
+            docker login -u satyamamrutkar -p yourpassword
+            docker push satyamamrutkar/kube1:latest
         '''
     }
 }
