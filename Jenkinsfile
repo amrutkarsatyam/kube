@@ -14,21 +14,20 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-            steps {
-                script {
-                    dockerImage = docker.build("${DOCKER_HUB_REPO}")
-                }
-            }
-        }
+    steps {
+        sh 'docker build -t yourdockerhubusername/kube1:latest .'
+    }
+}
+
 
         stage('Push to Docker Hub') {
-            steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
-                        dockerImage.push("latest")
-                    }
-                }
-            }
-        }
+    steps {
+        sh '''
+            docker login -u yourdockerhubusername -p yourpassword
+            docker push yourdockerhubusername/kube1:latest
+        '''
+    }
+}
+
     }
 }
